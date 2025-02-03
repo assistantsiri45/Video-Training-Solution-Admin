@@ -1,0 +1,43 @@
+.table th {
+    border-top: none;
+}
+.bg-custom-table-row{
+    background-color: #c9f1e8 !important;
+}
+.card-custom-height
+{
+    min-height: 235px;
+    max-height: 235px;
+}
+.jk_shah_top_banner{
+    color: #fff;
+    text-align: center;
+    font-size: 16px;
+    padding: 10px 0px;
+    /*background: linear-gradient(45deg, #100018 0%,#26006c 50%,#110038 100%);*/
+    background: linear-gradient(180deg, #F4624E 0%, #CF2F72 100%);
+    position: sticky;
+    z-index: 99999999;
+    top:0px;
+}
+/*.package-image*/
+/*{*/
+/*    width: 200px;*/
+/*    height: 170px;*/
+/*}*/
+/*@media screen and (max-width: 1285px) {*/
+/*    .card-custom-height*/
+/*    {*/
+/*        min-height: 295px;*/
+/*        max-height: 295px;*/
+/*    }*/
+/*    .package-image*/
+/*    {*/
+/*        width: 120px;*/
+/*        height: 140px;*/
+/*    }*/
+/*    .card-custom-height-header{*/
+/*        min-height: 295px;*/
+/*        max-height: 295px;*/
+/*    }*/
+/*}*/

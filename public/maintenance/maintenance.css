@@ -1,0 +1,145 @@
+body {
+    font-family: 'Inter', sans-serif;
+  }
+  .maintenance_bx_view{
+    padding-top:100px;
+  }
+  .maintenance_bx_view .container .maintenance_top_img{
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  .maintenance_bx_view .container .maintenance_top_img img{
+    width: 246.2px;
+    height: 155px;
+  }
+  .maintenance_bx_view .container h1{
+    font-size: 36px;
+    font-weight: bold;
+    text-align: center;
+    color: #192f60;
+    font-family: 'Inter', sans-serif;
+  }
+  .maintenance_bx_view .container p.subcontent{
+    font-size: 14px;
+    line-height: 1.71;
+    text-align: center;
+    color: #192f60;
+    font-family: 'Inter', sans-serif;
+    padding: 0 277px;
+    margin-bottom: 45px;
+  }
+  .maintenance_bx_view .container .info_card_row{
+    margin-bottom: 60px;
+  }
+  .maintenance_bx_view .container .info_card_row .info_card .info_card_bx{
+    width: 100%;
+    height: 266px;
+    border-radius: 10px;
+    box-shadow: 0 10px 30px 0 rgba(0, 82, 204, 0.1);
+    border: solid 1px #dce1e6;
+    background-color: #fff;
+  }
+  .maintenance_bx_view .container .info_card_row .info_card .info_card_bx .title{
+    height: 50px;
+    padding: 13px 15px 18px 15px;
+    background-color: #3c3585;
+    font-size: 16px;
+    font-weight: 600;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+    text-align: center;
+    color: #fff;
+    font-family: 'Inter', sans-serif;
+  }
+  .maintenance_bx_view .container .info_card_row .info_card .info_card_bx .data_display_bx{
+    padding: 40px;
+  }
+  .maintenance_bx_view .container .info_card_row .info_card .info_card_bx .data_display_bx .data_display{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .maintenance_bx_view .container .info_card_row .info_card .info_card_bx .data_display_bx .data_display + .data_display{
+    margin-top: 15px;
+  }
+  .maintenance_bx_view .container .info_card_row .info_card .info_card_bx .data_display_bx .data_display .data_display_info{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+  }
+  .maintenance_bx_view .container .info_card_row .info_card .info_card_bx .data_display_bx .data_display .data_display_info img{
+    min-width: 25px;
+    max-width: 25px;
+    min-height: 25px;
+    max-height: 25px;
+  }
+  .maintenance_bx_view .container .info_card_row .info_card .info_card_bx .data_display_bx .data_display .data_display_info a{
+    font-size: 16px;
+    font-weight: 400;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    font-family: 'Inter', sans-serif;
+    text-align: left;
+    color: #192f60;
+    text-decoration: none;
+  }
+  .maintenance_bx_view .container .info_card_row .info_card .info_card_bx .data_display_bx .data_display .data_display_info .contact_data p{
+    margin: 0;
+  }
+  .maintenance_bx_view .container .info_card_row .info_card .info_card_bx .data_display_bx .data_display .data_display_info .contact_data p + p{
+    margin-top: 3px;
+  }
+  .maintenance_bx_view .container .info_card_row .info_card .info_card_bx .data_display_bx .data_display .data_display_info a.address{
+    font-size: 14px;
+    font-family: 'Inter', sans-serif;
+  }
+  .maintenance_bx_view .container .list_contact_bx h2{
+    font-size: 24px;
+    font-weight: bold;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1;
+    letter-spacing: normal;
+    font-family: 'Inter', sans-serif;
+    text-align: center;
+    color: #192f60;
+    margin-bottom: 20px;
+  }
+  .maintenance_bx_view .container .list_contact_bx .list_contact_img{
+    text-align: center;
+    margin-bottom: 60px;
+    overflow-y: auto;
+  }
+  @media only screen and (min-width: 300px) and (max-width: 767px) {
+    .maintenance_bx_view .container p.subcontent{
+      padding: 0 5px;
+      margin-bottom: 25px;
+    }
+  }
+  @media only screen and (min-width: 300px) and (max-width: 991px) {
+    .maintenance_bx_view {
+      padding-top: 60px;
+    }
+    .maintenance_bx_view .container .maintenance_top_img img {
+      width: 226.2px;
+      height: 135px;
+    }
+    .maintenance_bx_view .container h1 {
+      font-size: 20px;
+    }
+    .maintenance_bx_view .container .info_card_row .info_card + .info_card{
+      margin-top: 30px;
+    }
+    .maintenance_bx_view .container .list_contact_bx h2{
+      font-size: 20px;
+    }
+  }
+  @media only screen and (min-width: 768px) and (max-width: 1199px) {
+    .maintenance_bx_view .container p.subcontent {
+      padding: 0 65px;
+      margin-bottom: 25px;
+    }
+  }

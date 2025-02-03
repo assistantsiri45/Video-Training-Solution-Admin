@@ -1,0 +1,4 @@
+name,phone,email,password,package_id,package_expire_at (DD-MM-YYYY)
+Hello B,1234567892,hellob@hello.com,12345678,250,28-02-2021
+Hello C,1234567893,helloc@hello.com,12345678,250,28-02-2021
+Hello D,1234567894,hellod@hello.com,12345678,250,28-02-2021
