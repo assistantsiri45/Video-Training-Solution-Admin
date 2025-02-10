@@ -49,7 +49,7 @@
             <p><strong>{{ $attributes['user_name'] }}</strong> has asked a question about the video <strong>{{ $attributes['video_name'] }}</strong> in <strong>{{ $attributes['package_name'] }}</strong> package. You can can answer the question by clicking the given button.</p>
             <p>Q: <strong>{{ $attributes['question'] }}</strong></p>
             <a href="{{ $attributes['answer_portal_url'] }}" style="background-color: #f58457; border: none; color: white; padding: 15px 32px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px;">ANSWER NOW</a>
-            <p>Best Regards,<br>JKSHAH Online</p>
+            <p>Best Regards,<br>EduEdgePro</p>
         </td>
     </tr>
     <tr>
@@ -57,7 +57,7 @@
             <table width="100%" border="0" cellspacing="0" cellpadding="0">
                 <tbody><tr>
                     <td align="center" class="footercopy">
-                        © {{ date('Y') }} JKSHAH ONLINE, All rights reserved.
+                        © {{ date('Y') }} EduEdgePro, All rights reserved.
                     </td>
                 </tr>
                 <tr>

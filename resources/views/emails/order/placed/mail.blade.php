@@ -101,7 +101,7 @@
             <table width="100%" border="0" cellspacing="0" cellpadding="0">
                 <tbody><tr>
                     <td align="center" class="footercopy">
-                        © {{ date('Y') }} JKSHAH ONLINE, All rights reserved.
+                        © {{ date('Y') }} EduEdgePro, All rights reserved.
                     </td>
                 </tr>
                 <tr>

@@ -14,7 +14,7 @@ return [
     |
     */
 
-    'title' => 'JKShah Online',
+    'title' => 'EduEdgePro',
     'title_prefix' => '',
     'title_postfix' => '',
 
@@ -50,7 +50,7 @@ return [
     'logo_img_class' => 'brand-image img-circle elevation-3 d-none',
     'logo_img_xl' => null,
     'logo_img_xl_class' => 'brand-image-xs',
-    'logo_img_alt' => 'JKShah Online',
+    'logo_img_alt' => 'EduEdgePro',
 
     /*
     |--------------------------------------------------------------------------

@@ -73,6 +73,6 @@ class UserCreated extends Notification implements ShouldQueue
     public function toSms($notifiable)
     {
         // return "Dear {$this->attributes['name']},\nWelcome to JKSHAH Online. To access your online course, please visit the site https://online.jkshahclasses.com and log in using user ID {$this->attributes['email']} and password {$this->attributes['password']}. In case of any technical issues, please WhatsApp on 7304454714 or write to us at helpdesk@jkshahclasses.com.\nWishing you success - JKSHAH Classes.";
-        return "Student, {$this->attributes['name']},\nWelcome to JKSHAH Online. To access your online course, please visit the site https://online.jkshahclasses.com and log in using user ID {$this->attributes['email']} and password {$this->attributes['password']}. In case of any technical issues, please WhatsApp on 7304454714 or write to us at helpdesk@jkshahclasses.com.\nWishing you success - JKSHAH Classes.";
+        return "Student, {$this->attributes['name']},\nWelcome to EduEdgePro. To access your online course, please visit the site https://online.jkshahclasses.com and log in using user ID {$this->attributes['email']} and password {$this->attributes['password']}. In case of any technical issues, please WhatsApp on 7304454714 or write to us at helpdesk@jkshahclasses.com.\nWishing you success - JKSHAH Classes.";
     }
 }

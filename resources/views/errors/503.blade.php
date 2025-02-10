@@ -7,7 +7,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
-    <title>JKSHAH ONLINE</title>
+    <title>EduEdgePro</title>
 </head>
 <body style="height:100vh;background: linear-gradient(-45deg, #F6BA2F, #F09128, #F58457)">
 <div class="h-100 d-flex justify-content-center align-items-center">

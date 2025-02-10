@@ -53,7 +53,7 @@
             You now have access to <strong>{{ $attributes['package_name'] }}</strong>. Log into <a href="{{ $attributes['web'] }}" target="_blank">{{ $attributes['web'] }}</a> and check your dashboard for lectures, study materials and tests related to the course. In case of any technical issues, please WhatsApp on <strong>7304454714</strong> or write to us at <strong>helpdesk@jkshahclasses.com</strong>.
             <br />
             <br />
-            Wishing you success – JKSHAH Classes.
+            Wishing you success – EduEdgePro Classes.
             <br />
             <br />
         </td>
@@ -63,7 +63,7 @@
             <table width="100%" border="0" cellspacing="0" cellpadding="0">
                 <tbody><tr>
                     <td align="center" class="footercopy">
-                        © {{ date('Y') }} JKSHAH ONLINE, All rights reserved.
+                        © {{ date('Y') }} EduEdgePro, All rights reserved.
                     </td>
                 </tr>
                 <tr>

@@ -50,10 +50,10 @@
             Dear {{ $attributes['name'] }},
             <br />
             <br />
-            Welcome to JK Shah Online. To access your online course, please visit the site <a href="{{ $attributes['web'] }}" target="_blank">{{ $attributes['web'] }}</a> and log in using user ID <strong>{{ $attributes['email'] }}</strong> and password <strong>{{ $attributes['password'] }}</strong>. In case of any technical issues, please WhatsApp on <strong>7304454714</strong> or write to us at <strong>helpdesk@jkshahclasses.com</strong>.
+            Welcome to JK Shah Online. To access your online course, please visit the site <a href="{{ $attributes['web'] }}" target="_blank">{{ $attributes['web'] }}</a> and log in using user ID <strong>{{ $attributes['email'] }}</strong> and password <strong>{{ $attributes['password'] }}</strong>. In case of any technical issues, please WhatsApp on <strong>7304454714</strong> or write to us at <strong>helpdesk@eduedgeclasses.com</strong>.
             <br />
             <br />
-            Wishing you success – JKSHAH Classes.
+            Wishing you success – EduEdgePro Classes.
             <br />
             <br />
         </td>
@@ -63,7 +63,7 @@
             <table width="100%" border="0" cellspacing="0" cellpadding="0">
                 <tbody><tr>
                     <td align="center" class="footercopy">
-                        © {{ date('Y') }} JKSHAH ONLINE, All rights reserved.
+                        © {{ date('Y') }} EduEdgePro, All rights reserved.
                     </td>
                 </tr>
                 <tr>
