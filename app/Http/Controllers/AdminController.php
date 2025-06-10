@@ -80,7 +80,7 @@ class AdminController extends Controller
                 ->rawColumns(['action'])
                 ->make(true);
         }
-
+//dd($data);
         $html = $builder->columns([
             ['data' => 'name', 'name' => 'name', 'title' => 'Name'],
             ['data' => 'email', 'name' => 'email', 'title' => 'Email'],
