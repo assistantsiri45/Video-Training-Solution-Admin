@@ -29,10 +29,10 @@ Route::get('/', function () {
     return redirect()->route('login');
 });
 
-Auth::routes([
-    'register' => false
-]);
-
+// Auth::routes([
+//     'register' => false
+// ]);
+Auth ::routes();
 
 
 Route::middleware(['auth', ReportAdminMiddleware::class, ContentManagerAdminMiddleware::class, ThirdPartyAgentAdminMiddleware::class, SuperAdminMiddleware::class, AssistantMiddleware::class,ReportingMiddleware::class,BackOfficeManagerMiddleware::class,ActivityLog::class,JuniorAdminMiddleware::class,FinanceManagerMiddleware::class])->group(function () {
@@ -565,3 +565,8 @@ Route::get('/update-progress-percentage', 'OrderItemController@updateProgressPer
 Route::get('update-selling-amount-of-packages', 'PackageController@updateSellingAmount');
 Route::resource('video-histories', 'VideoHistoryController')->only('index','store');
 Route::get('videos/get-player/{id}', 'VideoController@getPlayer');
+
+//new route add 
+Route::get('/upload', 'ScormController@showForm');
+Route::post('/upload', 'ScormController@upload')->name('scorm.upload');
+Route::get('/view/{id}', 'ScormController@view');
