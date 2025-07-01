@@ -42,7 +42,13 @@ class LoginController extends Controller
     protected function credentials(Request $request)
     {
         $credentials = $request->only($this->username(), 'password');
-        $credentials['role'] = ['1','8', '9', '10','12','13','14','15','16'];
+
+    //         dd([
+    //     'input' => $credentials,
+    //     'username' => $this->username(),
+    //     'full_request' => $request->all()
+    // ]);
+        $credentials['role'] = ['1','3','8', '9', '10','12','13','14','15','16'];
 
         return $credentials;
     }
