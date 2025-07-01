@@ -37,6 +37,7 @@ use App\Models\Quiz\Instruction;
 use App\Models\Quiz\Paragraph;
 use App\Models\Quiz\Test;
 use App\Models\Quiz\Question;
+use App\AdminCourse;
 
 class ActivityLog
 {
@@ -83,15 +84,25 @@ class ActivityLog
               $path_exp=explode("/",$path);
               $id=$path_exp[1];
               $module=$path_exp[0];
-              if($module=='courses'){
-                $course=Course::find($id);
-                $course1['name']=$course->name;
-                $course1['display']=$course->display;
-                $dataold=base64_encode(serialize($course1));
-               // dd($request->except(['_token', '_method']));
-                $datanew=base64_encode(serialize($request->except(['_token', '_method'])));
+              // if($module=='courses'){
+              //   $course=Course::find($id);
+              //   $course1['name']=$course->name;
+              //   $course1['display']=$course->display;
+              //   $dataold=base64_encode(serialize($course1));
+              //  // dd($request->except(['_token', '_method']));
+              //   $datanew=base64_encode(serialize($request->except(['_token', '_method'])));
                 
-              }else if($module=='levels'){
+              // }
+              if($module=='courses'){
+    $course = AdminCourse::find($id); 
+    $course1['name'] = $course->title; 
+    $course1['display'] = $course->description ?? ''; 
+    $dataold = base64_encode(serialize($course1));
+    $datanew = base64_encode(serialize($request->except(['_token', '_method'])));
+}
+
+              
+              else if($module=='levels'){
                 $level=Level::find($id);
                 $level1['name']=$level->name;
                 $level1['course_id']=$level->course_id;

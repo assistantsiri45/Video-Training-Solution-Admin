@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminCourseController;
 use App\Http\Middleware\ReportAdminMiddleware;
 use App\Http\Middleware\ReportingMiddleware;
 use App\Http\Middleware\ThirdPartyAgentAdminMiddleware;
@@ -268,6 +269,11 @@ Route::middleware(['auth', ReportAdminMiddleware::class, ContentManagerAdminMidd
     Route::post('videos/un-publish/{id}', 'VideoController@unPublish')->name('videos.un-publish');
 
     Route::get('subjects/level_from_course/{course_id}', 'SubjectController@level_from_course');
+
+//courses new route
+    // Route::resource('courses', AdminCourseController::class);    
+   Route::resource('courses', 'AdminCourseController');
+
 
     Route::group(['prefix' => 'packages', 'as' => 'packages.'], function () {
         Route::resource('chapter', 'Package\ChapterController')->except('index');

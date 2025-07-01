@@ -70,6 +70,15 @@ class User extends Authenticatable
         return $this->hasOne(StudyMaterialOrderLog::class);
     }
 
+
+public function courses()
+{
+    return $this->belongsToMany(Course::class, 'user_courses')
+        ->withPivot('enrolled_at', 'expire_date')
+        ->withTimestamps();
+}
+
+
     /**
      * The attributes that are mass assignable.
      *
