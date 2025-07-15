@@ -1,9 +1,12 @@
 <?php
 
 namespace App\Http\Controllers;
+
+use App\CourseProgress;
 use App\ScormPackage as AppScormPackage;
 use ZipArchive;
 use Illuminate\Http\Request;
+use App\CourseProgress as AppCourseProgress;
 
 class ScormController extends Controller
 {
@@ -61,11 +64,46 @@ class ScormController extends Controller
 
     return back()->with('success', 'SCORM course uploaded ');    }
 
-    public function view($id)
-    {
-        $package = AppScormPackage::findOrFail($id);
-        $launchUrl = asset('scorm_packages/' . $package->folder_name . '/' . $package->launch_file);
+public function view($id)
+{
+    $package = AppScormPackage::findOrFail($id);
 
-        return view('view', ['launchUrl' => $launchUrl, 'title' => $package->title]);
+    $launchPath = public_path('scorm_packages/' . $package->folder_name . '/' . $package->launch_file);
+    if (!file_exists($launchPath)) {
+        abort(404, 'Launch file not found on server');
     }
+
+    $launchUrl = asset('scorm_packages/' . $package->folder_name . '/' . $package->launch_file);
+
+    $userId = auth()->id();
+    $progress = AppCourseProgress::where('user_id', $userId)
+                ->where('course_id', $id)
+                ->first();
+
+    return view('view', [
+        'launchUrl' => $launchUrl,
+        'title' => $package->title,
+        'courseId' => $id,
+        'lastLocation' => optional($progress)->cmi_core_lesson_location,
+    ]);
+}
+
+
+    public function saveProgress(Request $request)
+{
+    $user = auth()->user();
+
+    CourseProgress::updateOrCreate(
+        [
+            'user_id' => $user->id,
+            'course_id' => $request->course_id
+        ],
+        [
+            $request->key => $request->value, // will save either lesson_location or lesson_status
+        ]
+    );
+
+    return response()->json(['status' => 'saved']);
+}
+
 }

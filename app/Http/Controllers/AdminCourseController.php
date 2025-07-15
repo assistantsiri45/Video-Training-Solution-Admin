@@ -36,20 +36,25 @@ class AdminCourseController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
-         $request->validate([
+{
+    $request->validate([
         'title' => 'required|string|max:255',
         'description' => 'nullable|string',
+        'training_link' => 'nullable|url',
+        'access_password' => 'nullable|string|max:255',
     ]);
 
     AdminCourse::create([
         'title' => $request->title,
         'description' => $request->description,
+        'training_link' => $request->training_link,
+        'access_password' => $request->access_password,
         // 'created_by' => auth()->id(),
     ]);
 
     return redirect()->route('courses.index')->with('success', 'Course created successfully.');
-    }
+}
+
 
     /**
      * Display the specified resource.
