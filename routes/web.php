@@ -575,4 +575,16 @@ Route::get('videos/get-player/{id}', 'VideoController@getPlayer');
 //new route add 
 Route::get('/upload', 'ScormController@showForm');
 Route::post('/upload', 'ScormController@upload')->name('scorm.upload');
-Route::get('/view/{id}', 'ScormController@view');
+Route::get('/view/{id}', 'ScormController@view')->middleware('auth');
+Route::post('/scorm/progress/save', 'ScormController@saveProgress')->name('scorm.progress.save');
+
+Route::get('/dashboard', 'UserDashboardController@index')->name('user.dashboard')->middleware('auth');
+// web.php
+Route::post('/course/progress/update', 'UserDashboardController@resumeupdate')->middleware('auth');
+
+// routes/web.php
+Route::post('/course/progress/save', 'CourseProgressController@save')->name('course.progress.save');
+Route::get('/course/progress/get/{id}', 'CourseProgressController@get');
+
+
+
