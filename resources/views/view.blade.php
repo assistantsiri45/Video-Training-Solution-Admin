@@ -21,31 +21,28 @@
 
 <script>
     let progressData = {};
+    let totalLessons = 10;
 
-    //  Session start time
-    const sessionStart = Date.now();
-
-    //  Dummy SCORM API
+    // SCORM Dummy API
     window.API = {
         LMSInitialize(param) {
             console.log(' LMSInitialize called');
             return 'true';
         },
         LMSFinish(param) {
-            console.log(' LMSFinish called');
+            console.log('LMSFinish called');
             return 'true';
         },
         LMSGetValue(name) {
-            console.log(' LMSGetValue:', name);
+            console.log(' LMSGetValue called: ' + name);
             return progressData[name] || '';
         },
         LMSSetValue(name, value) {
-            console.log(' LMSSetValue:', name, '=', value);
+            console.log(' LMSSetValue: ' + name + ' = ' + value);
             progressData[name] = value;
 
-            //  Auto mark completed if session_time >= 600s
-            if (name === 'cmi.core.lesson_status') {
-                progressData['lesson_status'] = value;
+            if (name === 'cmi.core.lesson_status' && value === 'completed') {
+                progressData['progress_percent'] = 100;
             }
 
             return 'true';
@@ -59,25 +56,50 @@
         LMSGetDiagnostic: () => 'No diagnostic'
     };
     window.API_1484_11 = window.API;
+
     console.log(" SCORM API injected");
 
-    // Calculate session time
-    function getSessionTimeInSeconds() {
-        return Math.floor((Date.now() - sessionStart) / 1000);
+    //  Get scroll percent from inside iframe
+    function getScrollPercentFromIframe() {
+        const iframe = document.getElementById('scorm-content');
+        try {
+            const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
+            const scrollElement = iframeDoc.scrollingElement || iframeDoc.documentElement || iframeDoc.body;
+
+            const scrollTop = scrollElement.scrollTop;
+            const scrollHeight = scrollElement.scrollHeight;
+            const clientHeight = scrollElement.clientHeight;
+
+            if (scrollHeight <= clientHeight) return 0;
+
+            const percentScrolled = Math.floor((scrollTop / (scrollHeight - clientHeight)) * 100);
+            console.log(" SCROLL:", scrollTop + "/" + scrollHeight + " = " + percentScrolled + "%");
+
+            if (!isNaN(percentScrolled) && percentScrolled > 0) {
+                progressData['progress_percent'] = percentScrolled;
+                return percentScrolled;
+            }
+        } catch (err) {
+            console.warn(" Cannot access iframe scroll (CORS or load delay)", err);
+        }
+        return 0;
     }
 
-    //  Auto save every 5 seconds
-    setInterval(() => {
-        const location = progressData['cmi.core.lesson_location'] || '';
-        let status = progressData['lesson_status'] || 'incomplete';
-        const sessionTime = getSessionTimeInSeconds();
+    // Initial scroll detection after load
+    document.getElementById('scorm-content').onload = () => {
+        setTimeout(() => {
+            getScrollPercentFromIframe();
+        }, 2000);
+    };
 
-        // If user stayed >= 600 seconds, auto complete
-        if (sessionTime >= 600 && status !== 'completed') {
-            status = 'completed';
-            progressData['lesson_status'] = 'completed';
-            console.log(' Auto-marked as completed (10 min+ session)');
-        }
+    // Auto save every 5 sec
+    setInterval(function () {
+        const lessonLoc = progressData['cmi.core.lesson_location'] || '';
+        const lessonStatus = progressData['cmi.core.lesson_status'] || '';
+        const scrollPercent = getScrollPercentFromIframe();
+        const percent = progressData['progress_percent'] || scrollPercent || 0;
+
+        if (!lessonLoc && !lessonStatus && percent === 0) return;
 
         fetch('/course/progress/save', {
             method: 'POST',
@@ -87,18 +109,18 @@
             },
             body: JSON.stringify({
                 course_id: "{{ $courseId }}",
-                cmi_core_lesson_location: location,
-                cmi_core_lesson_status: status,
-                session_time: sessionTime
+                progress_percent: percent,
+                cmi_core_lesson_location: lessonLoc,
+                cmi_core_lesson_status: lessonStatus
             })
         }).then(res => {
             if (res.ok) {
-                console.log(" Saved: time =", sessionTime, "status =", status);
+                console.log(" Progress Saved: " + percent + "%");
             } else {
-                console.error("❌ Save failed");
+                console.error(" Save failed");
             }
         }).catch(err => {
-            console.error(" Error saving", err);
+            console.error(" Error saving progress", err);
         });
     }, 5000);
 </script>

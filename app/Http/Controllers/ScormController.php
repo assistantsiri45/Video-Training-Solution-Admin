@@ -67,38 +67,26 @@ class ScormController extends Controller
 public function view($id)
 {
     $package = AppScormPackage::findOrFail($id);
-    $userId = auth()->id();
 
+    $launchPath = public_path('scorm_packages/' . $package->folder_name . '/' . $package->launch_file);
+    if (!file_exists($launchPath)) {
+        abort(404, 'Launch file not found on server');
+    }
+
+    $launchUrl = asset('scorm_packages/' . $package->folder_name . '/' . $package->launch_file);
+
+    $userId = auth()->id();
     $progress = AppCourseProgress::where('user_id', $userId)
                 ->where('course_id', $id)
                 ->first();
-
-    // Default launch file
-    $defaultLaunchFile = 'scorm_packages/' . $package->folder_name . '/' . $package->launch_file;
-
-    // Use saved lesson location if exists
-    if ($progress && $progress->cmi_core_lesson_location) {
-        $launchPath = public_path('scorm_packages/' . $package->folder_name . '/' . $progress->cmi_core_lesson_location);
-        if (file_exists($launchPath)) {
-            $launchUrl = asset('scorm_packages/' . $package->folder_name . '/' . $progress->cmi_core_lesson_location);
-        } else {
-            // fallback to default if saved file not found
-            $launchUrl = asset($defaultLaunchFile);
-        }
-    } else {
-        $launchUrl = asset($defaultLaunchFile);
-    }
 
     return view('view', [
         'launchUrl' => $launchUrl,
         'title' => $package->title,
         'courseId' => $id,
         'lastLocation' => optional($progress)->cmi_core_lesson_location,
-        'sessionTime' => optional($progress)->session_time ?? 0,
-        'lessonStatus' => optional($progress)->cmi_core_lesson_status,
     ]);
 }
-
 
 
     public function saveProgress(Request $request)
