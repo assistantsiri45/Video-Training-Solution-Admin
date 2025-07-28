@@ -35,27 +35,43 @@ class CourseProgressController extends Controller
 //         return response()->json(['status' => 'success', 'message' => 'Progress saved']);
 //     }
 
-    public function save(Request $request)
+public function save(Request $request)
 {
-   // dd($request->all());
     $request->validate([
-        'course_id' => '',
-        'progress_percent' => '',
-        'scroll_position' => 'nullable|integer'
+        'course_id' => 'required|integer',
+        'session_time' => 'nullable|integer',
+        'cmi_core_lesson_location' => 'nullable|string',
+        'cmi_core_lesson_status' => 'nullable|string'
     ]);
-//dd($request->all());
+
     $userId = auth()->id();
-//dd($userId);
-    $progress = AppCourseProgress::updateOrCreate(
-        ['user_id' => $userId, 'course_id' => $request->course_id],
-        [
-            'progress_percent' => $request->progress_percent,
-            'scroll_position' => $request->scroll_position ?? 0
-        ]
-    );
-dd($progress->all());
+
+    // Get old progress record
+    $progress = AppCourseProgress::firstOrNew([
+        'user_id' => $userId,
+        'course_id' => $request->course_id,
+    ]);
+
+    // Add session time to existing one (if any)
+    $oldTime = $progress->session_time ?? 0;
+    $newTime = $request->session_time ?? 0;
+    $totalSessionTime = $oldTime + $newTime;
+
+    // Auto-mark lesson_status as completed if time >= 600 seconds
+    $lessonStatus = $request->cmi_core_lesson_status ?? $progress->cmi_core_lesson_status;
+    if ($totalSessionTime >= 600) {
+        $lessonStatus = 'completed';
+    }
+
+    // Update or insert progress
+    $progress->session_time = $totalSessionTime;
+    $progress->cmi_core_lesson_location = $request->cmi_core_lesson_location ?? $progress->cmi_core_lesson_location;
+    $progress->cmi_core_lesson_status = $lessonStatus;
+    $progress->save();
+
     return response()->json(['status' => 'success']);
 }
+
 
 public function get($id)
 {
