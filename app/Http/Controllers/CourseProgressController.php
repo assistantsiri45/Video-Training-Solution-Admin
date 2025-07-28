@@ -34,7 +34,6 @@ public function save(Request $request)
     if ($totalSessionTime >= 600) {
         $lessonStatus = 'completed';
     }
-
     // Update or insert progress
     $progress->session_time = $totalSessionTime;
     $progress->cmi_core_lesson_location = $request->cmi_core_lesson_location ?? $progress->cmi_core_lesson_location;
