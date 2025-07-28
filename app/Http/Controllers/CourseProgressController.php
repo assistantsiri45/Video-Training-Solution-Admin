@@ -10,7 +10,6 @@ class CourseProgressController extends Controller
 
 public function save(Request $request)
 {
-   // dd($request->all());
     $request->validate([
         'course_id' => '',
         'progress_percent' => '',
