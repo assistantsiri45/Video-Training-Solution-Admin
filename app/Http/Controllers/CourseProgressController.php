@@ -31,7 +31,6 @@ public function save(Request $request)
     // Get course duration
     $course = AppScormPackage::find($request->course_id);
     $totalDuration = ($course && $course->duration_in_seconds) ? $course->duration_in_seconds : 0;
-
     // Set lesson status
     $lessonStatus = $request->cmi_core_lesson_status ?? $progress->cmi_core_lesson_status;
     if ($totalDuration > 0 && $totalSessionTime >= $totalDuration) {
