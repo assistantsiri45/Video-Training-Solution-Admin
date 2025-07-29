@@ -2,38 +2,41 @@
 
 namespace App\Http\Controllers;
 
+use App\ScormPackage as AppScormPackage;
 use App\CourseProgress as AppCourseProgress;
 use Illuminate\Http\Request;
 use App\Models\CourseProgress;
 class CourseProgressController extends Controller
 {
-
 public function save(Request $request)
 {
     $request->validate([
-        'course_id' => '',
-        'progress_percent' => '',
-        'scroll_position' => 'nullable|integer'
+        'course_id' => 'required|integer',
+        'session_time' => 'nullable|integer',
+        'cmi_core_lesson_location' => 'nullable|string',
+        'cmi_core_lesson_status' => 'nullable|string'
     ]);
-//dd($request->all());
+
     $userId = auth()->id();
 
-    // Get old progress record
+    // Get or create progress
     $progress = AppCourseProgress::firstOrNew([
         'user_id' => $userId,
         'course_id' => $request->course_id,
     ]);
-    // Add session time to existing one (if any)
+
     $oldTime = $progress->session_time ?? 0;
     $newTime = $request->session_time ?? 0;
     $totalSessionTime = $oldTime + $newTime;
+    // Get course duration
+    $course = AppScormPackage::find($request->course_id);
+    $totalDuration = ($course && $course->duration_in_seconds) ? $course->duration_in_seconds : 0;
 
-    // Auto-mark lesson_status as completed if time >= 600 seconds
+    // Set lesson status
     $lessonStatus = $request->cmi_core_lesson_status ?? $progress->cmi_core_lesson_status;
-    if ($totalSessionTime >= 600) {
+    if ($totalDuration > 0 && $totalSessionTime >= $totalDuration) {
         $lessonStatus = 'completed';
     }
-    // Update or insert progress
     $progress->session_time = $totalSessionTime;
     $progress->cmi_core_lesson_location = $request->cmi_core_lesson_location ?? $progress->cmi_core_lesson_location;
     $progress->cmi_core_lesson_status = $lessonStatus;
@@ -41,6 +44,7 @@ public function save(Request $request)
 
     return response()->json(['status' => 'success']);
 }
+
 
 public function get($id)
 {
