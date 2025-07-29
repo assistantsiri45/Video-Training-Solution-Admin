@@ -43,8 +43,6 @@ public function save(Request $request)
 
     return response()->json(['status' => 'success']);
 }
-
-
 public function get($id)
 {
     $userId = auth()->id();
